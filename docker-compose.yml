@@ -1,8 +1,8 @@
 version: "3.9"
 services:
   arch-wine-vnc:
-    image: toetje585/arch-wine-vnc:latest
-    container_name: arch-wine-vnc
+    image: fateinabox/arch-empyrion-headless:latest
+    container_name: arch-empyrion-headless
     environment:
       - VNC_PASSWORD=winevnc
       - PUID=<UID from user>
