@@ -60,6 +60,4 @@ cd "$GAMEDIR"
 sh -c 'until [ "`netstat -ntl | tail -n+3`" ]; do sleep 1; done
 sleep 5
 tail -F Logs/current.log ../Logs/*/*.log 2>/dev/null' &
-/usr/bin/wine DedicatedServer/EmpyrionDedicated.exe -batchmode -nographics -logFIle Logs/current.log "$@" &> /Logs/wine.log
-
-sudo -u steam exec /usr/bin/wine /opt/empyrion/
+sudo -u steam /usr/bin/wine DedicatedServer/EmpyrionDedicated.exe -batchmode -nographics -logFIle Logs/current.log "$@" &> /Logs/wine.log
