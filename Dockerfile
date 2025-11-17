@@ -14,6 +14,7 @@ ADD build/rootfs /
 
 # add install bash script
 ADD build/install.sh /root/install.sh
+ADD build/gamesetup.sh /root/gamesetup.sh
 
 # env
 ##################
@@ -23,7 +24,7 @@ ENV LANG en_US.UTF-8
 
 # install script
 ##################
-RUN chmod +x /root/install.sh && chmod +x /usr/local/bin/xvfb.sh && /bin/bash /root/install.sh
+RUN chmod +x /root/install.sh && chmod +x /usr/local/bin/xvfb.sh && /bin/bash /root/install.sh && chmod +x /root/gamesetup.sh && /bin/bash /root/gamesetup.sh
 
 # run
 ##################

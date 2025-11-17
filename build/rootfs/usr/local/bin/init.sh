@@ -45,3 +45,21 @@ echo "[info] Starting Supervisor..." | ts '%Y-%m-%d %H:%M:%.S'
 exec 1>&3 2>&4
 
 exec /usr/bin/supervisord -c /etc/supervisor.conf -n
+
+mkdir -p "$GAMEDIR/Logs"
+
+$GAMEDIR=/opt/empyrion
+
+export WINEDLLOVERRIDES="mscoree,mshtml="
+export DISPLAY=:1
+
+cd "$GAMEDIR"
+
+[ "$1" = "bash" ] && exec "$@"
+
+sh -c 'until [ "`netstat -ntl | tail -n+3`" ]; do sleep 1; done
+sleep 5
+tail -F Logs/current.log ../Logs/*/*.log 2>/dev/null' &
+/usr/bin/wine DedicatedServer/EmpyrionDedicated.exe -batchmode -nographics -logFIle Logs/current.log "$@" &> /Logs/wine.log
+
+sudo -u steam exec /usr/bin/wine /opt/empyrion/
